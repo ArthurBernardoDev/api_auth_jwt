@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateUsersTable1641657173970 implements MigrationInterface {
+export class CreateUser1641682820396 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp" ')
@@ -14,6 +14,10 @@ export class CreateUsersTable1641657173970 implements MigrationInterface {
                     isPrimary: true,
                     generationStrategy: "uuid",
                     default: 'uuid_generate_v4()',
+                },
+                {
+                    name: 'name',
+                    type: 'varchar',
                 },
                 {
                     name: 'email',
@@ -32,5 +36,4 @@ export class CreateUsersTable1641657173970 implements MigrationInterface {
         await queryRunner.dropTable('users');
         await queryRunner.query('DROP EXTENSION "uuid-ossp"')
     }
-
 }
